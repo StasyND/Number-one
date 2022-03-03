@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <conio.h>
+#include <string.h>
+class Cinema{
+ protected:
+	 char name [20];
+	 char surname [20];
+ public:
+	 int age;
+	 int nf;
+	 float money;
+	 void films(){
+		printf("Today at the cinema:\n");
+		printf("   1.Moonfall (12+) - 200.50\n");
+		printf("   2.Death on Nile (16+) - 250.70\n");
+		printf("   3.Fireheart (6+) - 180.30\n");
+		printf("   4.Nightmare Alley (18+) - 300.20\n"); }
+	 void payment(){
+		printf("Money received: ");
+		scanf("%f",&money);
+		if ((nf==1) &&(money>200.5)) {money=money-200.5; printf("Odd money:%.2f\n",money);}
+		if ((nf==2) &&(money>250.7)) {money=money-250.7; printf("Odd money:%.2f\n",money);}
+		if ((nf==3) &&(money>180.3)) {money=money-180.3; printf("Odd money:%.2f\n",money);}
+		if ((nf==4) &&(money>300.2)) {money=money-300.2; printf("Odd money:%.2f\n",money);}  }
+	 void SetIn(){
+		films();
+		printf("Enter your name: ");
+		scanf("%s", &name);
+		printf("Enter your surname: ");
+		scanf("%s", &surname);
+		printf("Enter your age: ");
+		scanf("%i", &age);
+
+		anf:
+		printf("Choose movie: ");
+		scanf("%i",&nf);
+		if (age>=18){payment();printf("Enjoy watching!\n"); }
+		if ((nf==4) && (age<18)) {printf("Please, choose another movie\n"); films(); goto anf; }
+		if ((nf==2) && (age<16)) {printf("Please, choose another movie\n"); films(); goto anf;}
+		if (((nf==1) || (nf==3)) &&(age<18)) {payment();printf("Enjoy watching!\n");}  }
+		void outTicket(int n){
+			printf("Number of ticket:%i\n", n);
+			printf("Name:%s\n",name);
+			printf("Surname:%s\n",surname); }
+
+		bool friend operator==(const Cinema &client1, const Cinema &client2){
+			if ((strcmp(client1.name, client2.name)==0) &&(strcmp(client1.surname, client2.surname)==0)) {
+				return true;}
+				return false;
+	 }
+
+};
+int main(){
+int i,k=0,n;
+Cinema ar[10];
+do{
+printf("1.Ticket booking\n");
+printf("2.Show ticket number:\n");
+printf("3.Show all tickets\n");
+printf("4.Exit\n");
+printf("Choose number:");
+scanf("%i",&n);
+	if (n==1) { ar[k].SetIn();
+	for (i = 0; i < k; i++) {
+					if (ar[k] == ar[i]) {
+						printf("           Ticket already booked\n");
+						ar[k].SetIn();}  }
+						 k++; }
+	if (n==2) {
+			printf("Enter number of ticket:");
+			scanf("%i",&i);
+			if (i<k){ ar[i].outTicket(i); }   }
+	if (n==3) {
+		for (i=0;i<k; i++){ ar[i].outTicket(i); }       }
+	if (n==4) {return(0);}
+}while(n>0);
+getch();
+}
